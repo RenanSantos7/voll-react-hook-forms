@@ -1,6 +1,7 @@
+import React from "react";
 import styled from "styled-components";
 
-const Button = styled.button`
+const StyledButton = styled.button`
   background-color: var(--azul-escuro);
   border-radius: 8px;
   padding: 12px 16px;
@@ -13,4 +14,17 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default Button;
+interface ButtonProps {
+  children: React.ReactNode
+  type?: 'submit' | 'button'
+  onClick?: ([arg]:any) => void
+}
+
+export default function Button({ type = 'button', children, onClick }: ButtonProps) {
+  return (
+    <StyledButton
+      type={type}
+      onClick={onClick}
+    >{children}</StyledButton>
+  )
+}

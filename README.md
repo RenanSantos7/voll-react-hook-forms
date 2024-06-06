@@ -1,8 +1,8 @@
-![Print do Banner](./public/voll.png)
-
 # Voll Med
 
 Este é um projeto desenvolvido no curso *Validando formulários com React Hook Form* da [Alura](https://cursos.alura.com.br/).
+
+![Print do Banner](./public/voll.png)
 
 >[!NOTE]
 >[Repositório do curso](https://github.com/alura-cursos/3652-react-forms)
@@ -13,6 +13,7 @@ Este é um projeto desenvolvido no curso *Validando formulários com React Hook 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
 - [React Hook Form](https://react-hook-form.com/)
+- [json-server](https://www.npmjs.com/package/json-server)
 
 <!-- ## Como acessar online
 

@@ -1,88 +1,52 @@
-import { useState } from "react";
-import { Button, Label, Fieldset, Input, Form, Titulo } from "../../components";
+import { useForm } from 'react-hook-form'
+import { Button, Form, Titulo } from '../../components'
+import Campo from '../../components/Campo/Campo'
 
 const CadastroPessoal = () => {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [senha, setSenha] = useState("");
-  const [senhaVerificada, setSenhaVerificada] = useState("");
+	const { register, handleSubmit } = useForm()
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log({ nome, email, senha, telefone, senhaVerificada });
-  };
+	return (
+		<>
+			<Titulo>Insira alguns dados básicos:</Titulo>
+			<Form>
+				<Campo
+					label='Nome'
+					placeholder='Digite seu nome completo'
+					{...register('nome')}
+				/>
 
-  return (
-    <>
-      <Titulo>Insira alguns dados básicos:</Titulo>
-      <Form onSubmit={handleSubmit}>
-        <Fieldset>
-          <Label htmlFor="campo-nome">Nome</Label>
-          <Input
-            id="campo-nome"
-            placeholder="Digite seu nome completo"
-            type="text"
-            value={nome}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setNome(e.target.value)
-            }
-          />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="campo-email">E-mail</Label>
-          <Input
-            id="campo-email"
-            placeholder="Insira seu endereço de email"
-            type="email"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
-          />
-        </Fieldset>
+				<Campo
+					label='Email'
+					placeholder='Insira seu endereço de email'
+					type='email'
+					{...register('email')}
+				/>
 
-        <Fieldset>
-          <Label>Telefone</Label>
-          <Input
-            id="campo-telefone"
-            type="text"
-            placeholder="Ex: (DDD) XXXXX-XXXX"
-            value={telefone}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTelefone(e.target.value)
-            }
-          />
-        </Fieldset>
+				<Campo
+					label='Telefone'
+					type='text'
+					placeholder='Ex: (DDD) XXXXX-XXXX'
+					{...register('telefone')}
+				/>
 
-        <Fieldset>
-          <Label htmlFor="campo-senha">Crie uma senha</Label>
-          <Input
-            id="campo-senha"
-            placeholder="Crie uma senha"
-            type="password"
-            value={senha}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSenha(e.target.value)
-            }
-          />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="campo-senha-confirmacao">Repita a senha</Label>
-          <Input
-            id="campo-senha-confirmacao"
-            placeholder="Repita a senha anterior"
-            type="password"
-            value={senhaVerificada}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSenhaVerificada(e.target.value)
-            }
-          />
-        </Fieldset>
-        <Button type="submit">Avançar</Button>
-      </Form>
-    </>
-  );
-};
+				<Campo
+					label='Crie uma senha'
+					placeholder='Crie uma senha'
+					type='password'
+					{...register('senha')}
+				/>
 
-export default CadastroPessoal;
+				<Campo
+					label='Repita a senha'
+					placeholder='Repita a senha anterior'
+					type='password'
+					{...register('senhaVerificada')}
+				/>
+
+				<Button type='submit'>Avançar</Button>
+			</Form>
+		</>
+	)
+}
+
+export default CadastroPessoal
