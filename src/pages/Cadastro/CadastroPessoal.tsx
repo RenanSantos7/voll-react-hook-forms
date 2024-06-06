@@ -1,14 +1,35 @@
 import { useForm } from 'react-hook-form'
 import { Button, Form, Titulo } from '../../components'
 import Campo from '../../components/Campo/Campo'
+import Checagem from '../../components/Checagem/Checagem'
+import { useDataContext } from '../../contexts/DataContext'
+
+interface FormTipos {
+    nome: string
+    email: string
+    telefone: string
+    senha: string
+    senhaVerificada: string
+}
 
 const CadastroPessoal = () => {
-	const { register, handleSubmit } = useForm()
+	const { register, handleSubmit } = useForm<FormTipos>()
+	const { cadastrarCliente } = useDataContext()
+
+	function aoSubmeter(dados: FormTipos) {
+		const novoCliente = {
+			nome: dados.nome,
+			email: dados.email,
+			telefone: dados.telefone,
+			senha: dados.senha,
+		}
+		cadastrarCliente(novoCliente)
+	}
 
 	return (
 		<>
 			<Titulo>Insira alguns dados básicos:</Titulo>
-			<Form>
+			<Form onSubmit={handleSubmit(aoSubmeter)}>
 				<Campo
 					label='Nome'
 					placeholder='Digite seu nome completo'
@@ -24,7 +45,6 @@ const CadastroPessoal = () => {
 
 				<Campo
 					label='Telefone'
-					type='text'
 					placeholder='Ex: (DDD) XXXXX-XXXX'
 					{...register('telefone')}
 				/>
@@ -42,6 +62,8 @@ const CadastroPessoal = () => {
 					type='password'
 					{...register('senhaVerificada')}
 				/>
+
+				<Checagem label='Li e concordo com os termos de uso' required />
 
 				<Button type='submit'>Avançar</Button>
 			</Form>

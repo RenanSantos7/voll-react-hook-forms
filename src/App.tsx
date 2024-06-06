@@ -1,12 +1,17 @@
-import Cadastro from "./pages/Cadastro";
-import PaginaBaseFormulario from "./pages/PaginaBaseFormulario";
+import Loading from './components/Loading/Loading'
+import DataProvider from './contexts/DataContext'
+import Cadastro from './pages/Cadastro'
+import PaginaBaseFormulario from './pages/PaginaBaseFormulario'
 
 function App() {
-  return (
-    <PaginaBaseFormulario>
-      <Cadastro />
-    </PaginaBaseFormulario>
-  );
+	return (
+		<DataProvider>
+			<PaginaBaseFormulario>
+				<Cadastro />
+			</PaginaBaseFormulario>
+			<Loading />
+		</DataProvider>
+	)
 }
 
-export default App;
+export default App
