@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
-import { Button, Fieldset, Form, Input, Label, Titulo } from '../../components'
-import Campo from '../../components/Campo/Campo'
-import Checagem from '../../components/Checagem/Checagem'
+import { Button } from '../../components'
+import { Checkbox, Fieldset, Form, Input, Label, Titulo } from '../../components/styles'
 import { useDataContext } from '../../contexts/DataContext'
+import { validarEmail } from '../../utils/validacaoes'
 
 interface FormTipos {
 	nome: string
@@ -11,13 +11,6 @@ interface FormTipos {
 	senha: string
 	senhaVerificada: string
 	termos: boolean
-}
-
-const checkbox = {
-    alignSelf: 'flex-end',
-    display: 'flex',
-    gap: '1ch',
-    color: '#505050'
 }
 
 export default function CadastroPessoal () {
@@ -57,7 +50,7 @@ export default function CadastroPessoal () {
 						type='email'
 						{...register('email', {
 							required: true,
-							pattern: /^[A-z0-9_%-.]+@\w+\.[A-z.]{2,}$/
+							validate: validarEmail
 						})}
 					/>
 				</Fieldset>
@@ -94,13 +87,13 @@ export default function CadastroPessoal () {
 						/>
 				</Fieldset>
 
-				<label style={checkbox}>
+				<Checkbox>
 					<input 
 						type='checkbox'
 						{...register('termos')}
 					/>
 					<span>Li e Aceito os termos</span>
-				</label>
+				</Checkbox>
 
 				<Button type='submit'>Avançar</Button>
 			</Form>
