@@ -11,12 +11,13 @@ const Input = styled.input<InputProps>`
   margin: 0.5em 0;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  border: ${(props) => (props.$error ? " 1px solid #a71e1e" : "none")};
+  border: ${(props) => (props.$error ? " 3px solid #a71e1e" : "none")};
   width: 100%;
   padding: 16px;
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
+  outline: none;
 
   &::placeholder {
     color: rgba(107, 110, 113, 1);
@@ -26,6 +27,7 @@ const Input = styled.input<InputProps>`
   }
 
   &:focus {
+    outline-width: 1px;
     outline-color: ${(props) => (props.$error ? "#a71e1e" : "")};
   }
 `;
