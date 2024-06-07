@@ -1,28 +1,37 @@
 import { useForm } from 'react-hook-form'
-import { Button, Form, Titulo } from '../../components'
+import { Button, Fieldset, Form, Input, Label, Titulo } from '../../components'
 import Campo from '../../components/Campo/Campo'
 import Checagem from '../../components/Checagem/Checagem'
 import { useDataContext } from '../../contexts/DataContext'
 
 interface FormTipos {
-    nome: string
-    email: string
-    telefone: string
-    senha: string
-    senhaVerificada: string
+	nome: string
+	email: string
+	telefone: string
+	senha: string
+	senhaVerificada: string
+	termos: boolean
 }
 
-const CadastroPessoal = () => {
+const checkbox = {
+    alignSelf: 'flex-end',
+    display: 'flex',
+    gap: '1ch',
+    color: '#505050'
+}
+
+export default function CadastroPessoal () {
 	const { register, handleSubmit } = useForm<FormTipos>()
 	const { cadastrarCliente } = useDataContext()
 
-	function aoSubmeter(dados: FormTipos) {
+	function aoSubmeter(data: FormTipos) {
 		const novoCliente = {
-			nome: dados.nome,
-			email: dados.email,
-			telefone: dados.telefone,
-			senha: dados.senha,
+		 nome: data.nome,
+		 email: data.email,
+		 telefone: data.telefone,
+		 senha: data.senha,
 		}
+		console.log(novoCliente)
 		cadastrarCliente(novoCliente)
 	}
 
@@ -30,45 +39,71 @@ const CadastroPessoal = () => {
 		<>
 			<Titulo>Insira alguns dados básicos:</Titulo>
 			<Form onSubmit={handleSubmit(aoSubmeter)}>
-				<Campo
-					label='Nome'
-					placeholder='Digite seu nome completo'
-					{...register('nome')}
-				/>
+				<Fieldset>
+					<Label>Nome</Label>
+					<Input
+						placeholder='Digite seu nome completo'
+						{...register('nome', {
+							required: true,
+							minLength: 5
+						})}
+					/>
+				</Fieldset>
 
-				<Campo
-					label='Email'
-					placeholder='Insira seu endereço de email'
-					type='email'
-					{...register('email')}
-				/>
+				<Fieldset>
+					<Label>Email</Label>
+					<Input
+						placeholder='Insira seu endereço de email'
+						type='email'
+						{...register('email', {
+							required: true,
+							pattern: /^[A-z0-9_%-.]+@\w+\.[A-z.]{2,}$/
+						})}
+					/>
+				</Fieldset>
 
-				<Campo
-					label='Telefone'
-					placeholder='Ex: (DDD) XXXXX-XXXX'
-					{...register('telefone')}
-				/>
+				<Fieldset>
+					<Label>Telefone</Label>
+					<Input
+						placeholder='Ex: (DD) XXXXX-XXXX'
+						{...register('telefone', {
+							required: true,
+							pattern: /^\d{2}9?\d{8}$/
+						})}
+					/>
+				</Fieldset>
 
-				<Campo
-					label='Crie uma senha'
-					placeholder='Crie uma senha'
-					type='password'
-					{...register('senha')}
-				/>
+				<Fieldset>
+					<Label>Senha</Label>
+					<Input
+						placeholder='Crie uma senha'
+						type='password'
+						{...register('senha', {
+							required: true,
+							pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*-_¬;\.])$/
+						})}
+					/>
+				</Fieldset>
 
-				<Campo
-					label='Repita a senha'
-					placeholder='Repita a senha anterior'
-					type='password'
-					{...register('senhaVerificada')}
-				/>
+				<Fieldset>
+					<Label>Repita a senha</Label>
+					<Input
+						placeholder='Repita a senha anterior'
+						type='password'
+						{...register('senhaVerificada')}
+						/>
+				</Fieldset>
 
-				<Checagem label='Li e concordo com os termos de uso' required />
+				<label style={checkbox}>
+					<input 
+						type='checkbox'
+						{...register('termos')}
+					/>
+					<span>Li e Aceito os termos</span>
+				</label>
 
 				<Button type='submit'>Avançar</Button>
 			</Form>
 		</>
 	)
 }
-
-export default CadastroPessoal

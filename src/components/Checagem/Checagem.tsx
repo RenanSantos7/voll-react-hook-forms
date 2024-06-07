@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 interface ChegagemProps extends FieldValues {
     label: string
-    required: boolean
+    // required: boolean
 }
 
 const StyledLabel = styled.label`
@@ -14,12 +14,11 @@ const StyledLabel = styled.label`
     color: #505050;
 `
 
-export default function Checagem({ label, required, ...props}: ChegagemProps) {
+export default function Checagem({ label, ...props}: ChegagemProps) {
     return (
         <StyledLabel>
             <input
                 type='checkbox'
-                required={required}
                 {...props}
             />
           <span>{label}</span>

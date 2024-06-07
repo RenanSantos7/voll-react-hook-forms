@@ -16,7 +16,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
 
     function cadastrarCliente(obj: Omit<ICliente, 'id'>) {
         const ids = clientes.map(cliente =>  cliente.id)
-        const proxId = ids.reduce((a, b) => Math.max(a, b)) + 1
+        const proxId = ids.reduce((a, b) => Math.max(a, b), 0) + 1
         const novoCliente = { id: proxId, ...obj }
         postData('clientes', novoCliente)
     }

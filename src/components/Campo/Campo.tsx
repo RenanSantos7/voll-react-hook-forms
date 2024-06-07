@@ -16,6 +16,7 @@ export default function Campo({ label, type = 'text', placeholder, ...props }: C
 			<Input
 				type={type}
 				placeholder={placeholder}
+				{...props}
 			/>
 		</Fieldset>
 	)
