@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import backgroundImage from './ImagemDeFundo.png'
+import styled from 'styled-components';
+import backgroundImage from './ImagemDeFundo.png';
 
 export const StyledContainer = styled.main`
 	background-image: url(${backgroundImage});
@@ -9,7 +9,7 @@ export const StyledContainer = styled.main`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-`
+`;
 
 export const Scroll = styled.div`
 	overflow: auto;
@@ -23,7 +23,7 @@ export const Scroll = styled.div`
 	&::-webkit-scrollbar {
 		width: 0;
 	}
-`
+`;
 
 export const StyledContent = styled.div`
 	background-color: white;
@@ -34,4 +34,4 @@ export const StyledContent = styled.div`
 	flex-direction: column;
 	align-items: center;
 	border-radius: 1rem;
-`
+`;

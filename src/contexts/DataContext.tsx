@@ -46,12 +46,14 @@ export default function DataProvider({ children }: { children: ReactNode }) {
 	}, []);
 
 	return (
-		<DataContext.Provider value={{
-			clientes,
-			cadastrarCliente,
-			loading,
-			modalMsg
-		}}>
+		<DataContext.Provider
+			value={{
+				clientes,
+				cadastrarCliente,
+				loading,
+				modalMsg,
+			}}
+		>
 			{children}
 		</DataContext.Provider>
 	);

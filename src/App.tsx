@@ -1,7 +1,7 @@
-import Loading from './components/Loading/Loading'
-import DataProvider from './contexts/DataContext'
-import Cadastro from './pages/Cadastro'
-import PaginaBaseFormulario from './pages/PaginaBaseFormulario'
+import Loading from './components/Loading/Loading';
+import DataProvider from './contexts/DataContext';
+import Cadastro from './pages/Cadastro';
+import PaginaBaseFormulario from './pages/PaginaBaseFormulario';
 
 function App() {
 	return (
@@ -11,7 +11,7 @@ function App() {
 			</PaginaBaseFormulario>
 			<Loading />
 		</DataProvider>
-	)
+	);
 }
 
-export default App
+export default App;

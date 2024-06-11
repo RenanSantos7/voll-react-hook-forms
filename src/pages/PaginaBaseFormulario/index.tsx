@@ -1,7 +1,15 @@
-import Modal from '../../components/Modal/Modal'
-import { Scroll, StyledContainer, StyledContent } from './PaginaBaseFormularioStyles'
+import Modal from '../../components/Modal/Modal';
+import {
+	Scroll,
+	StyledContainer,
+	StyledContent,
+} from './PaginaBaseFormularioStyles';
 
-export default function PaginaBaseFormulario({ children }: { children: React.ReactNode }) {
+export default function PaginaBaseFormulario({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
 		<>
 			<StyledContainer>
@@ -11,5 +19,5 @@ export default function PaginaBaseFormulario({ children }: { children: React.Rea
 			</StyledContainer>
 			<Modal />
 		</>
-	)
+	);
 }

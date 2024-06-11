@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { useDataContext } from '../../contexts/DataContext'
+import styled from 'styled-components';
+import { useDataContext } from '../../contexts/DataContext';
 
 const Sombra = styled.div`
 	position: fixed;
@@ -9,7 +9,7 @@ const Sombra = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-`
+`;
 
 const Girando = styled.div`
 	@keyframes girando {
@@ -26,17 +26,17 @@ const Girando = styled.div`
 	border: 12px solid white;
 	border-right-color: transparent;
 	border-radius: 50%;
-    animation: girando .5s linear infinite;
-`
+	animation: girando 0.5s linear infinite;
+`;
 
 export default function Loading() {
-	const { loading } = useDataContext()
+	const { loading } = useDataContext();
 
 	if (loading)
 		return (
 			<Sombra>
 				<Girando />
 			</Sombra>
-		)
-	else return null
+		);
+	else return null;
 }

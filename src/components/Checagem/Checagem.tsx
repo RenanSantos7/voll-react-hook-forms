@@ -1,27 +1,24 @@
-import { FieldValues } from "react-hook-form"
-import styled from "styled-components"
+import { FieldValues } from 'react-hook-form';
+import styled from 'styled-components';
 
 interface ChegagemProps extends FieldValues {
-    label: string
-    // required: boolean
+	label: string;
+	// required: boolean
 }
 
 const StyledLabel = styled.label`
-    align-self: flex-end;
-    display: flex;
-    gap: 1ch;
-    /* border: 1px solid red; */
-    color: #505050;
-`
+	align-self: flex-end;
+	display: flex;
+	gap: 1ch;
+	/* border: 1px solid red; */
+	color: #505050;
+`;
 
-export default function Checagem({ label, ...props}: ChegagemProps) {
+export default function Checagem({ label, ...props }: ChegagemProps) {
 	return (
 		<StyledLabel>
-			<input
-				type='checkbox'
-				{...props}
-			/>
+			<input type='checkbox' {...props} />
 			<span>{label}</span>
 		</StyledLabel>
-	)
+	);
 }

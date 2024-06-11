@@ -51,8 +51,8 @@ export default function CadastroPessoal() {
 	}
 
 	useEffect(() => {
-		reset()
-	  }, [isSubmitSuccessful])
+		reset();
+	}, [isSubmitSuccessful]);
 
 	return (
 		<>
@@ -165,7 +165,9 @@ export default function CadastroPessoal() {
 					)}
 				</Checkbox>
 
-				<Button type='submit' width='50%'>Avançar</Button>
+				<Button type='submit' width='50%'>
+					Avançar
+				</Button>
 			</Form>
 		</>
 	);
