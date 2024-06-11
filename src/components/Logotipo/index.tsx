@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import logo from "./Logo.png";
+import styled from 'styled-components'
+import logo from './Logo.png'
 
 const StyledImg = styled.img`
-  margin-top: 1.5rem;
-`;
+	margin-top: 1.5rem;
+`
 
 const Logotipo = () => {
-  return <StyledImg src={logo} alt="Logo da Voll" />;
-};
+	return <StyledImg src={logo} alt='Logo da Voll' />
+}
 
-export default Logotipo;
+export default Logotipo

@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "server": "json-server --watch public/data/db.json --port 3125",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "open": "concurrently \"npm run server\" \"npm run dev --open\""
+    "open": "concurrently \"npm run server\" \"npm run dev -- --open\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

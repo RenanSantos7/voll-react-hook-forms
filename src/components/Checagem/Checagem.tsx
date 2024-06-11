@@ -15,13 +15,13 @@ const StyledLabel = styled.label`
 `
 
 export default function Checagem({ label, ...props}: ChegagemProps) {
-    return (
-        <StyledLabel>
-            <input
-                type='checkbox'
-                {...props}
-            />
-          <span>{label}</span>
-        </StyledLabel>
-    )
+	return (
+		<StyledLabel>
+			<input
+				type='checkbox'
+				{...props}
+			/>
+			<span>{label}</span>
+		</StyledLabel>
+	)
 }

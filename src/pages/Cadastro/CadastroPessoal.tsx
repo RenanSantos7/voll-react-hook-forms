@@ -1,5 +1,6 @@
-import { useForm } from 'react-hook-form'
-import { Button } from '../../components'
+import { useForm } from 'react-hook-form';
+
+import { Button } from '../../components';
 import {
 	Checkbox,
 	ErrorMessage,
@@ -8,33 +9,35 @@ import {
 	Input,
 	Label,
 	Titulo,
-} from '../../components/styles'
-import { useDataContext } from '../../contexts/DataContext'
+} from '../../components/styles';
+import { useDataContext } from '../../contexts/DataContext';
 import {
-	validaRepetSenha,
 	validarEmail,
+	validaRepetSenha,
 	validarSenha,
-} from '../../utils/validacaoes'
+} from '../../utils/validacaoes';
+import { useEffect } from 'react';
 
 interface FormTipos {
-	nome: string
-	email: string
-	telefone: string
-	senha: string
-	senhaVerificada: string
-	termos: boolean
+	nome: string;
+	email: string;
+	telefone: string;
+	senha: string;
+	senhaVerificada: string;
+	termos: boolean;
 }
 
 export default function CadastroPessoal() {
 	const {
-		formState: { errors },
+		formState: { errors, isSubmitSuccessful },
 		handleSubmit,
 		register,
+		reset,
 		watch,
-	} = useForm<FormTipos>()
-	const { cadastrarCliente } = useDataContext()
+	} = useForm<FormTipos>();
+	const { cadastrarCliente } = useDataContext();
 
-	const senha = watch('senha')
+	const senha = watch('senha');
 
 	function aoSubmeter(data: FormTipos) {
 		const novoCliente = {
@@ -42,10 +45,14 @@ export default function CadastroPessoal() {
 			email: data.email,
 			telefone: data.telefone,
 			senha: data.senha,
-		}
-		console.log(novoCliente)
-		cadastrarCliente(novoCliente)
+		};
+		console.log(novoCliente);
+		cadastrarCliente(novoCliente);
 	}
+
+	useEffect(() => {
+		reset()
+	  }, [isSubmitSuccessful])
 
 	return (
 		<>
@@ -158,8 +165,8 @@ export default function CadastroPessoal() {
 					)}
 				</Checkbox>
 
-				<Button type='submit'>Avançar</Button>
+				<Button type='submit' width='50%'>Avançar</Button>
 			</Form>
 		</>
-	)
+	);
 }
