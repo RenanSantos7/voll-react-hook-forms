@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import { Button } from '../../components';
+import { Button, Campo } from '../../components';
 import {
 	Checkbox,
 	ErrorMessage,
 	Fieldset,
-	Form,
+	Formulario,
 	Input,
 	Label,
 	Titulo,
@@ -38,6 +39,7 @@ export default function CadastroPessoal() {
 	const { cadastrarCliente } = useDataContext();
 
 	const senha = watch('senha');
+	const navegarPara = useNavigate();
 
 	function aoSubmeter(data: FormTipos) {
 		const novoCliente = {
@@ -48,6 +50,7 @@ export default function CadastroPessoal() {
 		};
 		console.log(novoCliente);
 		cadastrarCliente(novoCliente);
+		navegarPara('/endereco');
 	}
 
 	useEffect(() => {
@@ -57,7 +60,7 @@ export default function CadastroPessoal() {
 	return (
 		<>
 			<Titulo>Insira alguns dados básicos:</Titulo>
-			<Form onSubmit={handleSubmit(aoSubmeter)}>
+			<Formulario onSubmit={handleSubmit(aoSubmeter)}>
 				<Fieldset>
 					<Label>Nome</Label>
 					<Input
@@ -168,7 +171,7 @@ export default function CadastroPessoal() {
 				<Button type='submit' width='50%'>
 					Avançar
 				</Button>
-			</Form>
+			</Formulario>
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Form = styled.form`
+const Formulario = styled.form`
 	width: 70%;
 	display: flex;
 	flex-direction: column;
@@ -8,4 +8,4 @@ const Form = styled.form`
 	gap: 1rem;
 `;
 
-export default Form;
+export default Formulario;

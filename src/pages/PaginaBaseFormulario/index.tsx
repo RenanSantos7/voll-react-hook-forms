@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import Modal from '../../components/Modal/Modal';
 import {
 	Scroll,
@@ -5,16 +6,14 @@ import {
 	StyledContent,
 } from './PaginaBaseFormularioStyles';
 
-export default function PaginaBaseFormulario({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function PaginaBaseFormulario() {
 	return (
 		<>
 			<StyledContainer>
 				<Scroll>
-					<StyledContent>{children}</StyledContent>
+					<StyledContent>
+						<Outlet />
+					</StyledContent>
 				</Scroll>
 			</StyledContainer>
 			<Modal />

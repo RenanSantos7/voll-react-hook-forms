@@ -1,18 +1,18 @@
+import { Button } from '../../components';
 import {
-	Button,
 	Fieldset,
-	Form,
+	Formulario,
 	FormContainer,
 	Input,
 	Label,
 	Titulo,
-} from '../../components';
+} from '../../components/styles';
 
-const CadastroEndereco = () => {
+export default function CadastroEndereco () {
 	return (
 		<>
 			<Titulo>Agora, mais alguns dados sobre você:</Titulo>
-			<Form>
+			<Formulario>
 				<Fieldset>
 					<Label htmlFor='campo-cep'>CEP</Label>
 					<Input
@@ -57,9 +57,7 @@ const CadastroEndereco = () => {
 					/>
 				</Fieldset>
 				<Button type='submit'>Cadastrar</Button>
-			</Form>
+			</Formulario>
 		</>
 	);
 };
-
-export default CadastroEndereco;

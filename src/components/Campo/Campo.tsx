@@ -4,9 +4,9 @@ import Input from '../styles/Input';
 import Label from '../styles/Label';
 
 interface CampoProps extends FieldValues {
-	type?: 'text' | 'email' | 'password';
 	label: string;
 	placeholder: string;
+	type?: 'text' | 'email' | 'password';
 }
 
 export default function Campo({
@@ -18,7 +18,11 @@ export default function Campo({
 	return (
 		<Fieldset>
 			<Label>{label}</Label>
-			<Input type={type} placeholder={placeholder} {...props} />
+			<Input
+				type={type}
+				placeholder={placeholder}
+				{...props}
+			/>
 		</Fieldset>
 	);
 }

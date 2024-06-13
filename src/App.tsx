@@ -1,17 +1,11 @@
-import Loading from './components/Loading/Loading';
+import { RouterProvider } from 'react-router-dom';
 import DataProvider from './contexts/DataContext';
-import Cadastro from './pages/Cadastro';
-import PaginaBaseFormulario from './pages/PaginaBaseFormulario';
+import router from './router';
 
-function App() {
+export default function App() {
 	return (
 		<DataProvider>
-			<PaginaBaseFormulario>
-				<Cadastro />
-			</PaginaBaseFormulario>
-			<Loading />
+			<RouterProvider router={router} />
 		</DataProvider>
 	);
 }
-
-export default App;

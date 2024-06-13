@@ -31,7 +31,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
 			console.log(modalMsg);
 		} else {
 			const ids = clientes.map(cliente => cliente.id);
-			const proxId = ids.reduce((a, b) => Math.max(a, b), 0) + 1;
+			const ultimoId = ids.reduce((a, b) => Math.max(a, b), 0);
+			const proxId = ultimoId + 1;
 			const novoCliente = { id: proxId, ...obj };
 			postData('clientes', novoCliente);
 		}
