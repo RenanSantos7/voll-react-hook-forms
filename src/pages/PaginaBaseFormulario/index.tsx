@@ -2,20 +2,22 @@ import { Outlet } from 'react-router-dom'
 import Modal from '../../components/Modal/Modal';
 import {
 	Scroll,
-	StyledContainer,
-	StyledContent,
+	Fundo,
+	Conteudo,
 } from './PaginaBaseFormularioStyles';
+import { Logotipo } from '../../components';
 
 export default function PaginaBaseFormulario() {
 	return (
 		<>
-			<StyledContainer>
+			<Fundo>
 				<Scroll>
-					<StyledContent>
+					<Conteudo>
+						<Logotipo />
 						<Outlet />
-					</StyledContent>
+					</Conteudo>
 				</Scroll>
-			</StyledContainer>
+			</Fundo>
 			<Modal />
 		</>
 	);

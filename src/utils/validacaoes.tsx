@@ -19,6 +19,6 @@ export function validarSenha(valor: string): boolean {
 	return true;
 }
 
-export function validaRepetSenha(valor: string, senha: string) {
+export function validaRepetSenha(valor: string, senha: string):boolean | string {
 	return valor === senha || 'As senhas não conferem';
 }

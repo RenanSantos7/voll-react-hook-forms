@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import CadastroPessoal from "./pages/Cadastro/CadastroPessoal"
 import PaginaBaseFormulario from "./pages/PaginaBaseFormulario"
 import CadastroEndereco from "./pages/Cadastro/CadastroEndereco"
+import Sucesso from "./pages/Sucesso/Sucesso"
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
             {
                 path: '/endereco',
                 element: <CadastroEndereco />
+            },
+            {
+                path: '/sucesso',
+                element: <Sucesso />
             }
         ],
     }

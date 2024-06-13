@@ -1,6 +1,7 @@
 import {
 	createContext,
 	ReactNode,
+	SetStateAction,
 	useContext,
 	useEffect,
 	useState,
@@ -12,6 +13,7 @@ interface IDataContext {
 	clientes: ICliente[];
 	cadastrarCliente: (obj: Omit<ICliente, 'id'>) => void;
 	loading: boolean;
+	setLoading: React.Dispatch<SetStateAction<boolean>>;
 	modalMsg: string;
 }
 
@@ -51,7 +53,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
 			value={{
 				clientes,
 				cadastrarCliente,
-				loading,
+				loading, setLoading,
 				modalMsg,
 			}}
 		>
