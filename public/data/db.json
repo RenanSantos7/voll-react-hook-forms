@@ -1,18 +1,18 @@
 {
   "clientes": [
     {
-      "id": 1,
-      "nome": "Renan Albuquerque Santos",
-      "email": "renansantos7@alura.com.br",
-      "telefone": "86998070376",
-      "senha": "123!@#asdRTY"
+      "id": "1",
+      "nome": "Pedro Castilho",
+      "email": "renan@alura.com.br",
+      "telefone": "85963258741",
+      "senha": "2!EzWoh!Y48B9EF&"
     },
     {
       "id": 2,
-      "nome": "Albuquerque Santos",
-      "email": "renansantos7@alura.com.br",
+      "nome": "Renan Santos",
+      "email": "renansantos.jus@gmail.com",
       "telefone": "86998070376",
-      "senha": "123!@#asdRTY"
+      "senha": "123asd!@#QWER"
     }
   ]
 }

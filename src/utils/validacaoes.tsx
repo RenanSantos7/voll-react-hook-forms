@@ -1,5 +1,5 @@
 export function validarEmail(valor: string): boolean {
-	const formatoEmail = /\w{2,}@alura.com.br/;
+	const formatoEmail = /^[A-z0-9_%-.]{3,}@\w{3,}\.(com|gov|org|edu|dev)(\.br)?$/;
 	if (!formatoEmail.test(valor)) {
 		console.error('Endereço de email inválido para este domínio');
 		return false;

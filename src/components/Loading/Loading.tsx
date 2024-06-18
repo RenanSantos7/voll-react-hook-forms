@@ -4,8 +4,8 @@ import { useDataContext } from '../../contexts/DataContext';
 const Sombra = styled.div`
 	position: fixed;
 	inset: 0;
-	background-color: hsla(209, 20%, 50%, 45%);
-	backdrop-filter: blur(4px);
+	background-color: hsla(209, 10%, 20%, 45%);
+	backdrop-filter: blur(3px);
 	display: flex;
 	align-items: center;
 	justify-content: center;

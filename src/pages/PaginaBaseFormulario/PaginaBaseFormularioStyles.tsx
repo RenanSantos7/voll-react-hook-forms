@@ -26,7 +26,7 @@ export const Scroll = styled.div`
 
 export const Conteudo = styled.main`
 	background-color: white;
-	width: max(50vw, 600px);
+	width: clamp(600px, 50vw, 825px);
 	height: max-content;
 	padding: 4rem 15%;
 	display: flex;

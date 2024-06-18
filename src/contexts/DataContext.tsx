@@ -6,15 +6,18 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { getData, postData } from '../utils/requisicoes';
+import { getData, patchData, postData } from '../utils/requisicoes';
 import { ICliente } from '../types/types';
 
 interface IDataContext {
 	clientes: ICliente[];
-	cadastrarCliente: (obj: Omit<ICliente, 'id'>) => void;
+	setClientes: React.Dispatch<SetStateAction<ICliente[]>>;
 	loading: boolean;
 	setLoading: React.Dispatch<SetStateAction<boolean>>;
 	modalMsg: string;
+	setModalMsg: React.Dispatch<SetStateAction<string>>;
+	clienteCriado: ICliente;
+	setClienteCriado: React.Dispatch<SetStateAction<ICliente>>;
 }
 
 const DataContext = createContext<IDataContext>(null);
@@ -22,22 +25,14 @@ const DataContext = createContext<IDataContext>(null);
 export default function DataProvider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState(true);
 	const [clientes, setClientes] = useState<ICliente[]>([]);
+	const [clienteCriado, setClienteCriado] = useState(null);
+	const [clienteFoiAlterado, setClienteAlterado] = useState(false);
 	const [modalMsg, setModalMsg] = useState('');
 
-	function cadastrarCliente(obj: Omit<ICliente, 'id'>) {
-		if (clientes.some(cliente => cliente.nome === obj.nome)) {
-			setModalMsg('Já existe um cliente com esse nome.');
-			console.log(modalMsg);
-		} else if (clientes.some(cliente => cliente.email === obj.email)) {
-			setModalMsg('Já existe um cliente com esse e-mail.');
-			console.log(modalMsg);
-		} else {
-			const ids = clientes.map(cliente => cliente.id);
-			const ultimoId = ids.reduce((a, b) => Math.max(a, b), 0);
-			const proxId = ultimoId + 1;
-			const novoCliente = { id: proxId, ...obj };
-			postData('clientes', novoCliente);
-		}
+	let novoCliente: ICliente;
+
+	function alterarCliente(cliente: ICliente) {
+		patchData('clientes', cliente)
 	}
 
 	useEffect(() => {
@@ -48,13 +43,26 @@ export default function DataProvider({ children }: { children: ReactNode }) {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (clienteCriado !== null) {
+			console.log(clienteCriado)
+			setClienteAlterado(true)
+		}
+	}, [clienteCriado]);
+
+	useEffect(() => {
+		if(clienteCriado !== null && clienteFoiAlterado) {
+			alterarCliente(clienteCriado)
+		}
+	}, [clienteCriado, clienteFoiAlterado]);
+
 	return (
 		<DataContext.Provider
 			value={{
-				clientes,
-				cadastrarCliente,
+				clientes, setClientes,
 				loading, setLoading,
-				modalMsg,
+				clienteCriado, setClienteCriado,
+				modalMsg, setModalMsg
 			}}
 		>
 			{children}

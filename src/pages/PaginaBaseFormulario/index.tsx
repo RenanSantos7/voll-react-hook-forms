@@ -5,7 +5,7 @@ import {
 	Fundo,
 	Conteudo,
 } from './PaginaBaseFormularioStyles';
-import { Logotipo } from '../../components';
+import { Loading, Logotipo } from '../../components';
 
 export default function PaginaBaseFormulario() {
 	return (
@@ -18,7 +18,9 @@ export default function PaginaBaseFormulario() {
 					</Conteudo>
 				</Scroll>
 			</Fundo>
+			
 			<Modal />
+			<Loading />
 		</>
 	);
 }

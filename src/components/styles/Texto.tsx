@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 interface TextoProps {
-	bold?: boolean;
-	italic?: boolean;
+	$bold?: boolean;
+	$italic?: boolean;
 }
 
 const Texto = styled.p<TextoProps>`
@@ -10,8 +10,8 @@ const Texto = styled.p<TextoProps>`
 	text-align: center;
 	margin-bottom: 0.5em;
 	line-height: 1.5;
-	font-weight: ${props => props.bold ? '700' : 'normal'};
-	font-style: ${props => props.italic ? 'italic' : 'normal'};
+	font-weight: ${props => props.$bold ? 'bold' : 'normal'};
+	font-style: ${props => props.$italic ? 'italic' : 'normal'};
 `;
 
 export default Texto;

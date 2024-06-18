@@ -8,7 +8,7 @@ export default function Sucesso() {
 		<>
 			<Titulo>Muito Obrigado!</Titulo>
 			<Banner width='60%' />
-			<Texto bold>Seu cadastro foi realizado com sucesso!</Texto>
+			<Texto $bold>Seu cadastro foi realizado com sucesso!</Texto>
 			<Texto>Gostaríamos de lhe dar as boas vindas ao grupo Voll Médica!. Aqui você terá acesso ao que há de melhor para o seu tratamento.</Texto>
 			<Button>Voltar para o Início</Button>
 		</>

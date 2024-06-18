@@ -18,6 +18,8 @@ import {
 	validarSenha,
 } from '../../utils/validacaoes';
 import { useEffect } from 'react';
+import { ICliente } from '../../types/types';
+import { postData } from '../../utils/requisicoes';
 
 interface FormTipos {
 	nome: string;
@@ -36,10 +38,27 @@ export default function CadastroPessoal() {
 		reset,
 		watch,
 	} = useForm<FormTipos>();
-	const { cadastrarCliente } = useDataContext();
-
+	
 	const senha = watch('senha');
+	const { clientes, setClientes, setClienteCriado, setModalMsg } = useDataContext();
 	const navegarPara = useNavigate();
+
+	function cadastrarCliente(obj: Omit<ICliente, 'id'>) {
+		if (clientes.some(cliente => cliente.nome === obj.nome)) {
+			setModalMsg('Já existe um cliente com esse nome.');
+		} else if (clientes.some(cliente => cliente.email === obj.email)) {
+			setModalMsg('Já existe um cliente com esse e-mail.');
+		} else {
+			const ids = clientes.map(cliente => cliente.id);
+			const ultimoId = ids.reduce((a, b) => Math.max(a, b), 0);
+			const proxId = ultimoId + 1;
+			const novoCliente = { id: proxId, ...obj };
+			postData('clientes', novoCliente);
+			setClientes(prev => [...prev, novoCliente]);
+			setClienteCriado(novoCliente)
+			navegarPara('/endereco');
+		}
+	}
 
 	function aoSubmeter(data: FormTipos) {
 		const novoCliente = {
@@ -50,12 +69,7 @@ export default function CadastroPessoal() {
 		};
 		console.log(novoCliente);
 		cadastrarCliente(novoCliente);
-		navegarPara('/endereco');
 	}
-
-	useEffect(() => {
-		reset();
-	}, [isSubmitSuccessful]);
 
 	return (
 		<>

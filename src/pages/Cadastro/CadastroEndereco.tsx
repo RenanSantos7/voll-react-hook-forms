@@ -12,16 +12,10 @@ import {
 	ErrorMessage,
 } from '../../components/styles';
 import { useDataContext } from '../../contexts/DataContext';
-
-interface Campos {
-	cep: string;
-	rua: string;
-	numero: string;
-	bairro: string;
-	localidade: string;
-}
+import { IEndereco } from '../../types/types';
 
 export default function CadastroEndereco() {
+	const { setLoading, setClienteCriado } = useDataContext();
 	const {
 		formState: { errors },
 		register,
@@ -29,13 +23,23 @@ export default function CadastroEndereco() {
 		setError,
 		setValue,
 		watch,
-	} = useForm<Campos>();
-	const { setLoading } = useDataContext();
+	} = useForm<IEndereco>({
+		mode: 'all',
+		defaultValues: {
+			cep: '',
+			rua: '',
+			numero: '',
+			bairro: '',
+			localidade: '',
+		}
+	});
 	const cepDigitado = watch('cep');
 	const navegarPara = useNavigate();
 
-	function aoSubmeter(data: Campos) {
-		console.log(data);
+	function aoSubmeter(data: IEndereco) {
+		const endereco = {...data}
+		setClienteCriado(prev => ({ ...prev, endereco }));
+		navegarPara('/sucesso');
 	}
 
 	async function buscaCep(cep: string) {
@@ -46,8 +50,10 @@ export default function CadastroEndereco() {
 			});
 			return;
 		}
+
 		setLoading(true);
 		const endPoint = `https://viacep.com.br/ws/${cep}/json/`;
+
 		try {
 			const resposta = await fetch(endPoint);
 			if (resposta.ok) {
@@ -62,9 +68,9 @@ export default function CadastroEndereco() {
 			}
 		} catch (error) {
 			console.error('Erro ao buscar CEP', error);
+		} finally {
+			setTimeout(() => setLoading(false), 1000);
 		}
-
-		setLoading(false);
 	}
 
 	return (
@@ -77,7 +83,9 @@ export default function CadastroEndereco() {
 						id='campo-cep'
 						placeholder='Insira seu CEP'
 						type='text'
-						{...register('cep')}
+						{...register('cep', {
+							required: 'Este campo é obrigatório'
+						})}
 						$error={!!errors.cep}
 						onBlur={() => buscaCep(cepDigitado)}
 					/>
@@ -91,7 +99,9 @@ export default function CadastroEndereco() {
 						id='campo-rua'
 						placeholder='Rua Agarikov'
 						type='text'
-						{...register('rua')}
+						{...register('rua', {
+							required: 'Este campo é obrigatório'
+						})}
 						$error={!!errors.rua}
 					/>
 					{errors.rua && (
@@ -106,12 +116,14 @@ export default function CadastroEndereco() {
 							id='campo-numero'
 							placeholder='Ex: 1440'
 							type='text'
-							{...register('numero')}
+							{...register('numero', {
+								required: 'Este campo é obrigatório'
+							})}
 							$error={!!errors.numero}
 						/>
 						{errors.numero && (
-						<ErrorMessage>{errors.cep.message}</ErrorMessage>
-					)}
+							<ErrorMessage>{errors.numero.message}</ErrorMessage>
+						)}
 					</Fieldset>
 					<Fieldset>
 						<Label htmlFor='campo-bairro'>Bairro</Label>
@@ -119,12 +131,14 @@ export default function CadastroEndereco() {
 							id='campo-bairro'
 							placeholder='Vila Mariana'
 							type='text'
-							{...register('bairro')}
+							{...register('bairro', {
+								required: 'Este campo é obrigatório'
+							})}
 							$error={!!errors.bairro}
 						/>
 						{errors.bairro && (
-						<ErrorMessage>{errors.bairro.message}</ErrorMessage>
-					)}
+							<ErrorMessage>{errors.bairro.message}</ErrorMessage>
+						)}
 					</Fieldset>
 				</FormContainer>
 				<Fieldset>
@@ -133,7 +147,9 @@ export default function CadastroEndereco() {
 						id='campo-localidade'
 						placeholder='São Paulo, SP'
 						type='text'
-						{...register('localidade')}
+						{...register('localidade', {
+							required: 'Este campo é obrigatório'
+						})}
 						$error={!!errors.localidade}
 					/>
 					{errors.localidade && (
