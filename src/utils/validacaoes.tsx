@@ -11,9 +11,7 @@ export function validarSenha(valor: string): boolean {
 	const formatoSenha =
 		/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_\-¬;.]).*$/;
 	if (!formatoSenha.test(valor)) {
-		console.error(
-			'Sua senha precisa ser segura. Ela deve conter letras minúsculas, maiúsculas, números e pelo menos um desses caracteres especiais: ! @ # $ % ^ & * - _ ¬ ; .',
-		);
+		console.error('Sua senha precisa ser segura. Ela deve conter letras minúsculas, maiúsculas, números e pelo menos um desses caracteres especiais: ! @ # $ % ^ & * - _ ¬ ; .');
 		return false;
 	}
 	return true;

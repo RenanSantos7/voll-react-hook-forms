@@ -31,13 +31,13 @@ export default function CadastroEndereco() {
 			numero: '',
 			bairro: '',
 			localidade: '',
-		}
+		},
 	});
 	const cepDigitado = watch('cep');
 	const navegarPara = useNavigate();
 
 	function aoSubmeter(data: IEndereco) {
-		const endereco = {...data}
+		const endereco = { ...data };
 		setClienteCriado(prev => ({ ...prev, endereco }));
 		navegarPara('/sucesso');
 	}
@@ -84,7 +84,7 @@ export default function CadastroEndereco() {
 						placeholder='Insira seu CEP'
 						type='text'
 						{...register('cep', {
-							required: 'Este campo é obrigatório'
+							required: 'Este campo é obrigatório',
 						})}
 						$error={!!errors.cep}
 						onBlur={() => buscaCep(cepDigitado)}
@@ -100,7 +100,7 @@ export default function CadastroEndereco() {
 						placeholder='Rua Agarikov'
 						type='text'
 						{...register('rua', {
-							required: 'Este campo é obrigatório'
+							required: 'Este campo é obrigatório',
 						})}
 						$error={!!errors.rua}
 					/>
@@ -117,7 +117,7 @@ export default function CadastroEndereco() {
 							placeholder='Ex: 1440'
 							type='text'
 							{...register('numero', {
-								required: 'Este campo é obrigatório'
+								required: 'Este campo é obrigatório',
 							})}
 							$error={!!errors.numero}
 						/>
@@ -132,7 +132,7 @@ export default function CadastroEndereco() {
 							placeholder='Vila Mariana'
 							type='text'
 							{...register('bairro', {
-								required: 'Este campo é obrigatório'
+								required: 'Este campo é obrigatório',
 							})}
 							$error={!!errors.bairro}
 						/>
@@ -148,7 +148,7 @@ export default function CadastroEndereco() {
 						placeholder='São Paulo, SP'
 						type='text'
 						{...register('localidade', {
-							required: 'Este campo é obrigatório'
+							required: 'Este campo é obrigatório',
 						})}
 						$error={!!errors.localidade}
 					/>

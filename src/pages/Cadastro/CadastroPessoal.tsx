@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Campo } from '../../components';
@@ -17,9 +17,9 @@ import {
 	validaRepetSenha,
 	validarSenha,
 } from '../../utils/validacaoes';
-import { useEffect } from 'react';
 import { ICliente } from '../../types/types';
 import { postData } from '../../utils/requisicoes';
+import InputMask from '../../components/InputMask/InputMask';
 
 interface FormTipos {
 	nome: string;
@@ -37,10 +37,12 @@ export default function CadastroPessoal() {
 		register,
 		reset,
 		watch,
+		control,
 	} = useForm<FormTipos>();
-	
+
 	const senha = watch('senha');
-	const { clientes, setClientes, setClienteCriado, setModalMsg } = useDataContext();
+	const { clientes, setClientes, setClienteCriado, setModalMsg } =
+		useDataContext();
 	const navegarPara = useNavigate();
 
 	function cadastrarCliente(obj: Omit<ICliente, 'id'>) {
@@ -55,7 +57,7 @@ export default function CadastroPessoal() {
 			const novoCliente = { id: proxId, ...obj };
 			postData('clientes', novoCliente);
 			setClientes(prev => [...prev, novoCliente]);
-			setClienteCriado(novoCliente)
+			setClienteCriado(novoCliente);
 			navegarPara('/endereco');
 		}
 	}
@@ -110,24 +112,35 @@ export default function CadastroPessoal() {
 					)}
 				</Fieldset>
 
-				<Fieldset>
-					<Label>Telefone</Label>
-					<Input
-						placeholder='Ex: (DD) XXXXX-XXXX'
-						{...register('telefone', {
-							required: 'Você precisa fornecer seu telefone',
-							pattern: {
-								value: /^\d{2}9?\d{8}$/,
-								message: `Tem certeza que seu telefone está correto?
+				<Controller
+					control={control}
+					name='telefone'
+					rules={{
+						required: 'Você precisa fornecer seu telefone',
+						pattern: {
+							value: /^\d{2}9?\d{8}$/,
+							message: `Tem certeza que seu telefone está correto?
 									O sistema tá dizendo que esse formato é inválido. 🤖`,
-							},
-						})}
-						$error={!!errors.telefone}
-					/>
-					{errors.telefone && (
-						<ErrorMessage>{errors.telefone.message}</ErrorMessage>
+						},
+					}}
+					render={({ field }) => (
+						<Fieldset>
+							<Label>Telefone</Label>
+							<InputMask
+								mask={'(99) 99999-9999'}
+								placeholder='Ex: (DD) XXXXX-XXXX'
+								$error={!!errors.telefone}
+								onChange={field.onChange}
+								value={field.value}
+							/>
+							{errors.telefone && (
+								<ErrorMessage>
+									{errors.telefone.message}
+								</ErrorMessage>
+							)}
+						</Fieldset>
 					)}
-				</Fieldset>
+				/>
 
 				<Fieldset>
 					<Label>Senha</Label>
