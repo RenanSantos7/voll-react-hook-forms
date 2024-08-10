@@ -16,13 +16,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
     "react-input-mask": "3.0.0-alpha.2",
     "react-router-dom": "^6.23.1",
     "react-router-hash-link": "^2.4.3",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -36,7 +38,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "json-server": "1.0.0-beta.1",
-    "prettier": "^3.3.1",
+    "prettier": "^3.3.2",
     "typescript": "^5.4.5",
     "vite": "^4.5.3"
   }

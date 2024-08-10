@@ -9,6 +9,7 @@ interface ChegagemProps extends FieldValues {
 const StyledLabel = styled.label`
 	align-self: flex-end;
 	display: flex;
+	flex-direction: column;
 	gap: 1ch;
 	/* border: 1px solid red; */
 	color: #505050;

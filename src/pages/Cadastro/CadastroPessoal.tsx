@@ -1,5 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 import { Button, Campo } from '../../components';
 import {
@@ -12,37 +14,35 @@ import {
 	Titulo,
 } from '../../components/styles';
 import { useDataContext } from '../../contexts/DataContext';
-import {
-	validarEmail,
-	validaRepetSenha,
-	validarSenha,
-} from '../../utils/validacaoes';
 import { ICliente } from '../../types/types';
 import { postData } from '../../utils/requisicoes';
 import InputMask from '../../components/InputMask/InputMask';
+import { esquemaCadastro } from './cadastro.schema';
 
-interface FormTipos {
-	nome: string;
-	email: string;
-	telefone: string;
-	senha: string;
-	senhaVerificada: string;
-	termos: boolean;
-}
+type FormTipos = z.infer<typeof esquemaCadastro>
 
 export default function CadastroPessoal() {
 	const {
 		formState: { errors, isSubmitSuccessful },
 		handleSubmit,
 		register,
-		reset,
-		watch,
 		control,
-	} = useForm<FormTipos>();
+	} = useForm<FormTipos>({
+		mode: 'all',
+		resolver: zodResolver(esquemaCadastro),
+		defaultValues: {
+			nome: '',
+			email: '',
+			telefone: '',
+			senha: '',
+			senhaVerificada: '',
+			termos: false
+		},
+	});
 
-	const senha = watch('senha');
-	const { clientes, setClientes, setClienteCriado, setModalMsg } =
-		useDataContext();
+	const {
+		clientes, setClientes, setClienteCriado, setModalMsg
+	} = useDataContext();
 	const navegarPara = useNavigate();
 
 	function cadastrarCliente(obj: Omit<ICliente, 'id'>) {
@@ -81,14 +81,7 @@ export default function CadastroPessoal() {
 					<Label>Nome</Label>
 					<Input
 						placeholder='Digite seu nome completo'
-						{...register('nome', {
-							required: 'A gente precisa do seu nome',
-							minLength: {
-								value: 5,
-								message:
-									'O nome precisa ter pelo menos 5 caracteres',
-							},
-						})}
+						{...register('nome')}
 						$error={!!errors.nome}
 					/>
 					{errors.nome && (
@@ -101,10 +94,7 @@ export default function CadastroPessoal() {
 					<Input
 						placeholder='Insira seu endereço de email'
 						type='email'
-						{...register('email', {
-							required: 'Você precisa fornecer seu email.',
-							validate: validarEmail,
-						})}
+						{...register('email')}
 						$error={!!errors.email}
 					/>
 					{errors.email && (
@@ -148,15 +138,7 @@ export default function CadastroPessoal() {
 						placeholder='Crie uma senha'
 						type='password'
 						autoComplete='new-password'
-						{...register('senha', {
-							required: 'Cadê a sua senha?',
-							minLength: {
-								value: 8,
-								message:
-									'Sua senha tem que ter pelo menos 8 dígitos',
-							},
-							validate: validarSenha,
-						})}
+						{...register('senha')}
 						$error={!!errors.senha}
 					/>
 					{errors.senha && (
@@ -169,10 +151,7 @@ export default function CadastroPessoal() {
 					<Input
 						placeholder='Repita a senha anterior'
 						type='password'
-						{...register('senhaVerificada', {
-							required: 'Você não repetiu sua senha',
-							validate: valor => validaRepetSenha(valor, senha),
-						})}
+						{...register('senhaVerificada')}
 						$error={!!errors.senhaVerificada}
 					/>
 					{errors.senhaVerificada && (
@@ -185,9 +164,7 @@ export default function CadastroPessoal() {
 				<Checkbox>
 					<input
 						type='checkbox'
-						{...register('termos', {
-							required: 'Poxa, você precisa aceitar os termos...',
-						})}
+						{...register('termos')}
 					/>
 					<span>Li e Aceito os termos</span>
 					{errors.termos && (
